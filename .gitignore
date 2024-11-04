@@ -1,0 +1,15 @@
+data/raw/xyz_files/*
+data/raw/*
+data/raw/*.csv
+data/processed/*
+
+# Virtual Environment
+venv/
+myenv_py/
+ENV/
+
+# Logs and Results
+wandb/
+logs/
+output/
+*.log

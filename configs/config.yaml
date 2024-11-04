@@ -1,0 +1,68 @@
+# Data paths
+xyz_dir: "data/raw/CoAu_nanoparticle_data"
+features_file: "data/raw/CoAu_nanoparticle_dataset.csv"
+target_column: "Formation_E"
+output_dir: "output"
+cache_dir: "data/processed/cache"
+
+# Wandb configuration
+wandb:
+  project: "molecular-property-prediction"
+  entity: "roupenminassian"
+  tags: ["GNN", "molecular-properties"]
+  sweep:
+    method: "bayes"  # Options: random, grid, bayes
+    metric:
+      name: "val_rmse"
+      goal: "minimize"
+    parameters:
+      conv_type:
+        values: ["GCN", "GAT", "GraphConv"]
+      num_layers:
+        values: [2, 3, 4, 5]
+      hidden_channels:
+        values: [32, 64, 128, 256]
+      dropout_rate:
+        distribution: "uniform"
+        min: 0.1
+        max: 0.5
+      learning_rate:
+        distribution: "log_uniform"
+        min: 1e-4
+        max: 1e-2
+      weight_decay:
+        distribution: "log_uniform"
+        min: 1e-5
+        max: 1e-3
+      batch_size:
+        values: [32, 64, 128]
+      optimizer:
+        values: ["Adam", "AdamW"]
+      use_residual:
+        values: [true, false]
+
+# Default parameters (used when not running sweeps)
+model_params:
+  num_features: 1
+  conv_type: "GCN"
+  num_layers: 3
+  hidden_channels: 64
+  dropout_rate: 0.2
+  use_residual: true
+
+training_params:
+  epochs: 100
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  optimizer: "AdamW"
+  early_stopping_patience: 10
+  lr_factor: 0.5
+  lr_patience: 5
+
+data_params:
+  random_seed: 42
+  test_size: 0.2
+  num_workers: 4
+  prefetch_factor: 2
+  pin_memory: true
