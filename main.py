@@ -151,7 +151,7 @@ def train_model(config: Dict[str, Any], base_config: Config, logger: Logger):
             print("\nWARNING: Running on CPU. Training will be slow.")
         
         # Create optimized data loaders
-        batch_size = 32 if device.type == 'cuda' else training_params['batch_size']
+        batch_size = 1 if device.type == 'cuda' else training_params['batch_size']
         train_loader, val_loader, test_loader = create_gpu_optimized_loaders(
             dataset, train_idx, val_idx, test_idx, batch_size
         )

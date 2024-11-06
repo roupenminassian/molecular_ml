@@ -63,7 +63,7 @@ cd molecular_ml
 2. Create and activate a virtual environment (recommended):
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate.bat
 ```
 
 3. Install dependencies:
